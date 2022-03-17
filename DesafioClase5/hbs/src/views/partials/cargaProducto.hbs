@@ -1,0 +1,78 @@
+<div class="container m-5">
+  <h1>Carga de Productos</h1>
+  <form action="/productos" method="POST">
+    <div class="input-group m-3">
+      <span class="input-group-text">Nombre: </span>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Nombre"
+        name="title"
+      />
+    </div>
+    <div class="input-group m-3">
+      <span class="input-group-text">Precio: </span>
+      <input
+        type="number"
+        class="form-control"
+        placeholder="Precio"
+        name="price"
+      />
+    </div>
+    <div class="input-group m-3">
+      <span class="input-group-text">URL Imagen </span>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="URL"
+        name="thumbnail"
+        id="url"
+      />
+    </div>
+    <button class="btn btn-success m-3" type="submit"><i
+        class="bi bi-check-square-fill"
+      ></i>
+      Registrar</button>
+    <a href="/productos" class="btn btn-info m-3" role="button"><i
+        class="bi bi-collection-play-fill"
+      ></i>
+      Catalogo</a>
+  </form>
+  <hr />
+  <div class="container">
+    <span>URL de Fotos Precargadas</span>
+    <br />
+    <button
+      class="btn btn-sm btn-primary"
+      onclick="copiar('https://www.pcfactory.cl/public/foto/43833/1.jpg?t=1647480649')"
+    ><i class="bi bi-card-image"></i> Foto 1</button>
+    <button
+      class="btn btn-sm btn-primary"
+      onclick="copiar('https://www.pcfactory.cl/public/foto/38802/1.jpg?t=1631066390')"
+    ><i class="bi bi-card-image"></i> Foto 2</button>
+    <button
+      class="btn btn-sm btn-primary"
+      onclick="copiar('https://www.pcfactory.cl/public/foto/38217/1.jpg?t=1631031802')"
+    ><i class="bi bi-card-image"></i> Foto 3</button>
+    <button
+      class="btn btn-sm btn-primary"
+      onclick="copiar('https://www.pcfactory.cl/public/foto/43505/1.jpg?t=1646882421')"
+    ><i class="bi bi-card-image"></i> Foto 4</button>
+    <button
+      class="btn btn-sm btn-primary"
+      onclick="copiar('https://www.pcfactory.cl/public/foto/42286/1.jpg?t=1646882137')"
+    ><i class="bi bi-card-image"></i> Foto 5</button>
+    <button
+      class="btn btn-sm btn-primary"
+      onclick="copiar('https://www.pcfactory.cl/public/foto/42835/1.jpg?t=1631039384')"
+    ><i class="bi bi-card-image"></i> Foto 6</button>
+    <button
+      class="btn btn-sm btn-primary"
+      onclick="copiar('https://www.pcfactory.cl/public/foto/41618/1.jpg?t=1631054615')"
+    ><i class="bi bi-card-image"></i> Foto 7</button>
+    <button
+      class="btn btn-sm btn-primary"
+      onclick="copiar('https://www.pcfactory.cl/public/foto/44961/1.jpg?t=1647464860')"
+    ><i class="bi bi-card-image"></i> Foto 8</button>
+  </div>
+</div>
