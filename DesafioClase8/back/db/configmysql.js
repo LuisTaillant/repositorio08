@@ -6,7 +6,7 @@ const knex = _knex({
     host: "127.0.0.1", //LOCALHOST del servidor APACHE
     port: 3306,
     user: "root",
-    password: "", // si no hay password hay que ponerlo igual y dejarlo vacío
+    password: "1234", // si no hay password hay que ponerlo igual y dejarlo vacío
     database: "ecommerce", // base de tatos creada en phpmyadmin
   },
 
