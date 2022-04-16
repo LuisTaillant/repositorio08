@@ -1,0 +1,143 @@
+mongo
+#crear base de datos ecommerce
+use ecommerce
+
+# Crear la colección mensajes y agregar la primera entrada
+db.mensajes.insertOne({mail: 'luis@gmail.com', mensaje: 'Hola MUNDO', {$currentDate:{date:true}}})
+db.mensajes.insertOne({mail:'luis@gmail', mensaje: 'HOLA MUNDO', date:'15/04/2022 11:10:22'})
+
+#Agregar entradas
+db.mensajes.insertMany([{mail:'juan@gmail', mensaje: 'hola cabeza', date:'15/04/2022 11:10:22'}, {mail:'jorge@gmail', mensaje: 'Chu', date:'15/04/2022 11:10:22'}])
+#--------------------------------------------------------------
+
+# Crear productos
+db.productos.insertMany([{nombre: "Notebook HP 348 G7 14 HD Intel i5",
+    tipo: "notebook",
+    precio: 100,
+    imagen: "https://www.pcfactory.cl/public/foto/43833/1.jpg?t=1647480649",
+    stock: 12,
+    quantity: 0,
+    total: null
+  },
+  {
+    nombre: "Notebook HP Gamer Pavilion Intel i5",
+    tipo: "notebook gamer",
+    precio: 500,
+    imagen: "https://www.pcfactory.cl/public/foto/38802/1.jpg?t=1631066390",
+    stock: 13,
+    quantity: 0,
+    total: null
+  },
+  {
+    nombre: "Notebook Acer Gamer Nitro 5 Intel i5",
+    tipo: "notebook",
+    precio: 900,
+    imagen: "https://www.pcfactory.cl/public/foto/38217/1.jpg?t=1631031802",
+    stock: 4,
+    quantity: 0,
+    total: null
+  },
+  {
+    nombre: "Notebook HP 240 G8 14 HD Celeron",
+    tipo: "notebook",
+    precio: 1000,
+    imagen: "https://www.pcfactory.cl/public/foto/43505/1.jpg?t=1646882421",
+    stock: 13,
+    quantity: 0,
+    total: null
+  },
+  {
+    nombre: "Notebook HP 2en1 Spectre x360 13.5 FHD Intel Core i5",
+    tipo: "notebook",
+    precio: 1700,
+    imagen: "https://www.pcfactory.cl/public/foto/42286/1.jpg?t=1646882137",
+    stock: 12,
+    quantity: 0,
+    total: null
+  },
+  {
+    nombre: "Smartphone Galaxy A12 128GB",
+    tipo: "smartphone",
+    precio: 2500,
+    imagen: "https://www.pcfactory.cl/public/foto/42835/1.jpg?t=1631039384",
+    stock: 5,
+    quantity: 0,
+    total: null
+  },
+  {
+    nombre: "Smartphone Moto E7 32GB",
+    tipo: "smartphone",
+    precio: 4000,
+    imagen: "https://www.pcfactory.cl/public/foto/41618/1.jpg?t=1631054615",
+    stock: 3,
+    quantity: 0,
+    total: null
+  },
+  {
+    nombre: "Smartphone Nokia 3.4 64GB",
+    tipo: "smartphone",
+    precio: 5000,
+    imagen: "https://www.pcfactory.cl/public/foto/44961/1.jpg?t=1647464860",
+    stock: 14,
+    quantity: 0,
+    total: null
+}])
+#---------------------------------------------
+
+# LISTAR DOCS
+db.mensajes.find().pretty()
+db.productos.find().pretty()
+#---------------------------------------------
+
+#CANTIDAD DE DOCS
+db.mensajes.count()
+db.productos.count() #8
+#---------------------------------------------
+
+##Agregar un producto más en la colección de productos 
+db.productos.insertOne({nombre: "Smartphone Redmi 9A 32GB",
+    tipo: "smartphone",
+    precio: 5000,
+    imagen: "https://www.pcfactory.cl/public/foto/44960/1.jpg?t=1647464871",
+    stock: 14,
+    quantity: 0,
+    total: null})
+db.productos.count() #9
+#----------------------------------------------
+
+#Listar los productos con precio menor a 1000 pesos.
+db.productos.find({'precio':{$lt: 1000}}).pretty()
+#-------------------------------------------------
+
+# Listar los productos con precio entre los 1000 a 3000 pesos. 
+db.productos.find({$and: [{precio: {$gte: 1000}}, {precio: {$lte: 3000}}]}).pretty()
+#--------------------------------------------------
+
+#Listar los productos con precio mayor a 3000 pesos.
+db.productos.find({'precio':{$gt: 3000}}).pretty()
+#--------------------------------------------------
+
+#Realizar una consulta que traiga sólo el nombre del tercer producto más barato.
+db.productos.find({},{nombre:1, _id:0}).sort({precio:1}).skip(2).limit(1)
+#---------------------------------------------------
+
+#Hacer una actualización sobre todos los productos, agregando el campo stock a todos ellos con un valor de 100.
+db.productos.updateMany({},{$set:{stock:100}})
+#---------------------------------------------------
+
+#Cambiar el stock a cero de los productos con precios mayores a 4000 pesos. 
+db.productos.updateMany({'precio':{$gt:4000}},{$set:{stock:0}})
+#-----------------------------------------------------
+
+#Borrar los productos con precio menor a 1000 pesos 
+db.productos.deleteMany({precio:{$lt:1000}})
+
+#Crear un usuario 'pepe' clave: 'asd456' que sólo pueda leer la base de datos ecommerce. 
+use admin
+db.createUser({user: 'pepe', pwd: 'asd456', roles:[{role: 'read', db: 'ecommerce'}]})
+db.getUsers()
+exit
+mongo -u pepe -p --authenticationDatabase ecommerce
+#mongo -u pepe -p asd456
+
+mongodump --host="localhost" --port=27017 --db=ecommerce
