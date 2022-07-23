@@ -8,7 +8,7 @@
     "test": "node ./utils/benchmark.js",
     "server": "nodemon --inspect ./server.js 8080 --db mongo",
     "mocha": "mocha ./Test/Mocha/mocha.test.js",
-    "supertest": "mocha ./Test/Supertest/supertest.chai.test.js",
+    "supertest": "mocha ./Test/Supertest/supertest.chai.test.js --timeout 5000",
     "start": "0x ./server.js",
     "pm2-fork": "pm2 start ./server.js --name server1 --watch -- 8080",
     "4ever": "forever start ./server.js 8086",
@@ -30,13 +30,16 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "express-graphql": "^0.12.0",
     "express-session": "^1.17.2",
     "gitignore": "^0.7.0",
+    "graphql": "^16.5.0",
     "jsonwebtoken": "^8.5.1",
     "minimist": "^1.2.6",
     "mocha": "^10.0.0",
     "mongoose": "^6.3.0",
     "nodemailer": "^6.7.5",
+    "nodemon": "^2.0.15",
     "os": "^0.1.2",
     "socket.io": "^4.4.1",
     "supertest": "^6.2.4",
@@ -46,7 +49,6 @@
     "winston-levelonly": "^1.0.3"
   },
   "devDependencies": {
-    "@faker-js/faker": "^6.2.0",
-    "nodemon": "^2.0.19"
+    "@faker-js/faker": "^6.2.0"
   }
 }
